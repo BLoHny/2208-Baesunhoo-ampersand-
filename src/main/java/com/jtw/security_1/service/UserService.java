@@ -20,7 +20,7 @@ public class UserService {
                 });
 
         User user = User.builder()
-                .username(userName)
+                .userName(userName)
                 .password(password)
                 .build();
         //저장
