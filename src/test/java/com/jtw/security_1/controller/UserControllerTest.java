@@ -14,12 +14,14 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
-public class UserControllerTest {
+    public class UserControllerTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -48,6 +50,9 @@ public class UserControllerTest {
     void join_fail() throws Exception {
         String username = "BLoHny";
         String password = "1234";
+
+        when(userService.join(any(), any()))
+                .thenThrow(new RuntimeException("해당 userID가 중복됩니다"));
 
         mockMvc.perform(post("/api/v1/users/join")
                 .contentType(MediaType.APPLICATION_JSON)
