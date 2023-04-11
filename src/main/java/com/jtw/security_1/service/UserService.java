@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -36,7 +38,13 @@ public class UserService {
     }
 
     public String login(String userName, String password) {
-
+        //UserName 없음
+         User selectedUser = userRepository.findByUserName(userName)
+                .orElseThrow(() -> new AppException(ErrorCode.USERNAME_NOT_FOUND, userName + "이 없습니다."));
+        //password 틀림
+        if (!passwordEncoder.matches(selectedUser.getPassword(), password)) {
+            throw new AppException(ErrorCode.INVALID_PASSWORD, "패스워드가 잘못 입력 했습니다.");
+        }
         return null;
     }
 }
