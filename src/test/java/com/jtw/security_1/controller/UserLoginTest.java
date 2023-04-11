@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithAnonymousUser;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -22,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest
-public class UserServiceTest {
+public class UserLoginTest {
 
 
     @Autowired
@@ -36,6 +37,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("로그인 성공")
+    @WithMockUser
     void login_success() throws Exception {
 
         String userName = "BLoHny";
@@ -54,7 +56,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("로그인 실패 - userName 없음")
-    @WithAnonymousUser
+    @WithMockUser
     void login_fail() throws Exception {
         String userName = "BLoHny";
         String password = "1234";
