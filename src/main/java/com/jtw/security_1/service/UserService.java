@@ -5,6 +5,7 @@ import com.jtw.security_1.exception.AppException;
 import com.jtw.security_1.exception.ErrorCode;
 import com.jtw.security_1.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+
     private final BCryptPasswordEncoder passwordEncoder;
 
     public String join(String userName, String password) {
@@ -31,5 +33,10 @@ public class UserService {
         userRepository.save(user);
 
         return "SUCCESS";
+    }
+
+    public String login(String userName, String password) {
+
+        return null;
     }
 }

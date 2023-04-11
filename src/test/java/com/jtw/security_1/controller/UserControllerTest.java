@@ -1,10 +1,8 @@
 package com.jtw.security_1.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jtw.security_1.domain.User;
 import com.jtw.security_1.domain.dto.UserJoinRequest;
 import com.jtw.security_1.service.UserService;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +10,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -39,6 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         String password = "1234";
 
         mockMvc.perform(post("/api/v1/users/join")
+                        .with(csrf())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(objectMapper.writeValueAsBytes(new UserJoinRequest(userName, password))))//UserJoin에 담은값 JSON으로 변환
                 .andDo(print()) //요청 응답 출력
@@ -55,6 +54,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
                 .thenThrow(new RuntimeException("해당 userID가 중복됩니다"));
 
         mockMvc.perform(post("/api/v1/users/join")
+                        .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsBytes(new UserJoinRequest(username, password))))
                 .andDo(print())
