@@ -12,6 +12,6 @@ public enum ErrorCode {
     USERNAME_NOT_FOUND(HttpStatus.NOT_FOUND, ""),
     INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, "");
 
-    private HttpStatus httpStatus;
-    private String message;
+    private final HttpStatus httpStatus;
+    private final String message;
 }
