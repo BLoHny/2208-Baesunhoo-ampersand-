@@ -47,7 +47,7 @@ public class UserLoginTest {
                 .thenReturn("token");
 
         mockMvc.perform(post("/api/v1/users/login")
-                        .with(csrf())
+                        .with(csrf()) //springSecurity 설정으로 추가
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(new UserLoginRequest(userName, password))))
                 .andDo(print())
@@ -58,7 +58,7 @@ public class UserLoginTest {
     @DisplayName("로그인 실패 - userName 없음")
     @WithMockUser
     void login_fail() throws Exception {
-        String userName = "BLoHny";
+        String userName = "TesterA";
         String password = "1234";
 
         when(userService.login(any(), any()))
@@ -78,7 +78,7 @@ public class UserLoginTest {
     void login_failByPassword() throws Exception {
 
         String userName = "BLoHny";
-        String password = "1234";
+        String password = "0000";
 
         when(userService.login(any(), any()))
                 .thenThrow(new AppException(ErrorCode.INVALID_PASSWORD, ""));
