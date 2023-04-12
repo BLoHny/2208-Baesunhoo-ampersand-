@@ -5,11 +5,10 @@ import com.jtw.security_1.exception.AppException;
 import com.jtw.security_1.exception.ErrorCode;
 import com.jtw.security_1.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -42,9 +41,10 @@ public class UserService {
          User selectedUser = userRepository.findByUserName(userName)
                 .orElseThrow(() -> new AppException(ErrorCode.USERNAME_NOT_FOUND, userName + "이 없습니다."));
         //password 틀림
-        if (!passwordEncoder.matches(selectedUser.getPassword(), password)) {
+        if (!Objects.equals(selectedUser.getPassword(), password)) {
             throw new AppException(ErrorCode.INVALID_PASSWORD, "패스워드가 잘못 입력 했습니다.");
         }
-        return null;
+
+        return "token";
     }
 }
