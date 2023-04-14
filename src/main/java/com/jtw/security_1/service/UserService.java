@@ -46,7 +46,7 @@ public class UserService {
          User selectedUser = userRepository.findByUserName(userName)
                 .orElseThrow(() -> new AppException(ErrorCode.USERNAME_NOT_FOUND, userName + "이 없습니다."));
         //password 틀림
-        if (!Objects.equals(selectedUser.getPassword(), password)) {
+        if (!passwordEncoder.matches(password, selectedUser.getPassword())) {
             throw new AppException(ErrorCode.INVALID_PASSWORD, "패스워드가 잘못 입력 했습니다.");
         }
 
