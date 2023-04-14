@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 //인가 정책
                 .requestMatchers("/api/v1/users/join", "/api/v1/users/login").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/v1/reviews").authenticated()
+                .requestMatchers( "/api/v1/reviews").authenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //JWT를 쓰는 경우
