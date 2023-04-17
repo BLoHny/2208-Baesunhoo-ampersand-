@@ -9,10 +9,10 @@ import java.util.Date;
 
 public class JwtTokenUtil  {
 
-    @AllArgsConstructor
-    private enum TokenType {
-        ACCESS_TOKEN,
-        REFRESH_TOKEN;
+    public static boolean isExpired(String token, String key) {
+        return Jwts.parser().setSigningKey(key).parseClaimsJws(token)
+                .getBody().getExpiration().before(new Date());
+
     }
 
     public static String createToken(String userName, String key, long expireTimeMs) {
