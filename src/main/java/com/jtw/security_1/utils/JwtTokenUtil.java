@@ -9,6 +9,10 @@ import java.util.Date;
 
 public class JwtTokenUtil  {
 
+    public static String getUserName(String token, String key) {
+        return Jwts.parser().setSigningKey(key).parseClaimsJws(token)
+                .getBody().get("userName", String.class);
+    }
     public static boolean isExpired(String token, String key) {
         return Jwts.parser().setSigningKey(key).parseClaimsJws(token)
                 .getBody().getExpiration().before(new Date());
