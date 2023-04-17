@@ -55,7 +55,8 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         //Token에서 Username 꺼내기
-        String userName = "";
+        String userName = JwtTokenUtil.getUserName(token, key);
+        log.info("userName : {}", userName);
 
         //권한 부여
         UsernamePasswordAuthenticationToken authenticationToken =
