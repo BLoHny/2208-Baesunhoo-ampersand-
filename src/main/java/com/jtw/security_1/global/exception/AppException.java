@@ -1,4 +1,4 @@
-package com.jtw.security_1.exception;
+package com.jtw.security_1.global.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
