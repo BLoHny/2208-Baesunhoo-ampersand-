@@ -1,4 +1,4 @@
-package com.jtw.security_1.controller;
+package com.jtw.security_1.domain.user.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;

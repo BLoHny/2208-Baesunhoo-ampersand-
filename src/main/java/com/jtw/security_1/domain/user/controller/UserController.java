@@ -1,7 +1,7 @@
-package com.jtw.security_1.controller;
+package com.jtw.security_1.domain.user.controller;
 
-import com.jtw.security_1.service.UserService;
-import com.jtw.security_1.domain.dto.UserJoinRequest;
+import com.jtw.security_1.domain.user.service.UserService;
+import com.jtw.security_1.domain.user.presentation.dto.UserJoinRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

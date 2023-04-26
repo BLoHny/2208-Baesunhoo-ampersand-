@@ -1,8 +1,7 @@
-package com.jtw.security_1.config;
+package com.jtw.security_1.global.security.config;
 
-import com.jtw.security_1.domain.User;
-import com.jtw.security_1.filter.JwtFilter;
-import com.jtw.security_1.service.UserService;
+import com.jtw.security_1.domain.user.service.UserService;
+import com.jtw.security_1.global.filter.JwtRequestFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -19,26 +18,25 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final UserService userService;
-
-    @Value("${jwt.token.secret}")
-    private String key;
+    private final JwtRequestFilter jwtRequestFilter;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception { //DSL 사용 보안구성
-        return httpSecurity
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception { //DSL 사용 보안구성
+        http
                 .httpBasic().disable() //UI, UX Disable
                 .csrf().disable()//크로스 사이트 기능
                 .cors().and() //도메인이 다를때 허용
+                .formLogin().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .authorizeHttpRequests()
                 //인가 정책
                 .requestMatchers("/api/v1/users/join", "/api/v1/users/login").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/v1/**").authenticated()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //JWT를 쓰는 경우
-                .and()
-                .addFilterBefore(new JwtFilter(userService, key), UsernamePasswordAuthenticationFilter.class)
-                .build();
+                .requestMatchers( "/product/**").authenticated()
+                .anyRequest().denyAll();
+        http
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
     }
 }

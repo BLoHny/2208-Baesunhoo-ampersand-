@@ -1,4 +1,4 @@
-package com.jtw.security_1.domain.dto;
+package com.jtw.security_1.domain.user.presentation.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
