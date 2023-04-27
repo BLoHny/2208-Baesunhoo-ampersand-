@@ -1,13 +1,14 @@
 package com.jtw.security_1.domain.product.presentation;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
-@Data
+@NoArgsConstructor
+@Getter
 public class ProductJoinRequest {
 
-    private String productname;
+    private String productName;
     private String content;
-    private Long userid;
 }
