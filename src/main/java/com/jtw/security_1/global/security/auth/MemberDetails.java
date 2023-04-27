@@ -2,9 +2,13 @@ package com.jtw.security_1.global.security.auth;
 
 import com.jtw.security_1.domain.user.entity.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -13,9 +17,10 @@ public class MemberDetails implements UserDetails {
 
     private final User user;
 
-
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {return Collections.singleton(user.getRole()); }
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Arrays.asList(new SimpleGrantedAuthority(user.getRole().toString()));
+    }
 
     @Override
     public String getPassword() {
