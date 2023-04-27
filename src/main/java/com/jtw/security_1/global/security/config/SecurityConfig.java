@@ -1,12 +1,9 @@
 package com.jtw.security_1.global.security.config;
 
-import com.jtw.security_1.domain.user.service.UserService;
 import com.jtw.security_1.global.filter.JwtRequestFilter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -21,7 +18,7 @@ public class SecurityConfig {
     private final JwtRequestFilter jwtRequestFilter;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception { //DSL 사용 보안구성
+    protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception { //DSL 사용 보안구성
         http
                 .httpBasic().disable() //UI, UX Disable
                 .csrf().disable()//크로스 사이트 기능
@@ -39,4 +36,5 @@ public class SecurityConfig {
 
         return http.build();
     }
+
 }
