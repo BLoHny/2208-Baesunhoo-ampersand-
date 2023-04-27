@@ -2,6 +2,7 @@ package com.jtw.security_1.global.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
@@ -11,4 +12,5 @@ public class EncoderConfig {
     public BCryptPasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
+
 }
