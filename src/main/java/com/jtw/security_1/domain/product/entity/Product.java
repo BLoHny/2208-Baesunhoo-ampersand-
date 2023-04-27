@@ -9,18 +9,20 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @NoArgsConstructor
-@Data
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "productid", nullable = false)
-    private Long productid;
+    @Column(name = "product_id", nullable = false)
+    private Long productId;
 
-    @Column(name = "productname")
-    private String productname;
+    @Column(name = "productName")
+    private String productName;
 
     @Column(name = "content")
     private String content;
 
-    private Long userid;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
