@@ -18,13 +18,15 @@ import java.util.List;
 public class User {
 
     @Id
-    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
+
+    @Column(unique = true)
     private String userName;
+
     private String password;
 
-    @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;
 }
