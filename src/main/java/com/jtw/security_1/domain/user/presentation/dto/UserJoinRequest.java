@@ -1,5 +1,6 @@
 package com.jtw.security_1.domain.user.presentation.dto;
 
+import com.jtw.security_1.domain.user.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -12,4 +13,5 @@ public class UserJoinRequest {
 
     private String userName;
     private String password;
+    private Role role;
 }
