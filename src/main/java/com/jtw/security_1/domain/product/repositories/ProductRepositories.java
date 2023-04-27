@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepositories extends JpaRepository<Product, Long> {
 
-    Boolean existsByProductname(String productname);
+    Boolean existsByProductName(String productName);
 
-    boolean findContnetByProductid(Long productid);
+    Product findByProductName(String productName);
 }
