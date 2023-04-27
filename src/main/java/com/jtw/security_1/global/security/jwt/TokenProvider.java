@@ -96,6 +96,6 @@ public class TokenProvider {
 
     public UsernamePasswordAuthenticationToken authenticationToken(String userName) {
         UserDetails userDetails = memberDetailsService.loadUserByUsername(userName);
-        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 }
