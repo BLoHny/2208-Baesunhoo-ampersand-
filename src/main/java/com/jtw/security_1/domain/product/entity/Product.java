@@ -1,5 +1,6 @@
 package com.jtw.security_1.domain.product.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jtw.security_1.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,7 +23,11 @@ public class Product {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "price")
+    private int price;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 }
