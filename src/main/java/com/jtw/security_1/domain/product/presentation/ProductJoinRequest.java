@@ -11,4 +11,5 @@ public class ProductJoinRequest {
 
     private String productName;
     private String content;
+    private int price;
 }
