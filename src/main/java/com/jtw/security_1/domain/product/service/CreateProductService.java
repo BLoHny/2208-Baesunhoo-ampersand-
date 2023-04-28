@@ -31,6 +31,7 @@ public class CreateProductService {
         Product product = Product.builder()
                 .productName(joinRequest.getProductName())
                 .content(joinRequest.getContent())
+                .price(joinRequest.getPrice())
                 .user(user)
                 .build();
 
