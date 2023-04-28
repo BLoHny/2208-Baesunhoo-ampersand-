@@ -3,24 +3,23 @@ package com.jtw.security_1.domain.order.entity;
 import com.jtw.security_1.domain.product.entity.Product;
 import com.jtw.security_1.domain.user.entity.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Builder
 @Entity
 @AllArgsConstructor
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "OrderCart")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-    @ManyToOne
-    @JoinColumn(name = "product_Id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+
     private Product product;
 
     @ManyToOne
