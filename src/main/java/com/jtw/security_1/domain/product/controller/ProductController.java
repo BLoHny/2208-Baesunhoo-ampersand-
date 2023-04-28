@@ -4,16 +4,14 @@ import com.jtw.security_1.domain.product.entity.Product;
 import com.jtw.security_1.domain.product.presentation.ProductDeleteRequest;
 import com.jtw.security_1.domain.product.presentation.ProductJoinRequest;
 import com.jtw.security_1.domain.product.repositories.ProductRepositories;
-import com.jtw.security_1.domain.product.service.CreateProductService;
-import com.jtw.security_1.domain.product.service.DeleteProductService;
-import com.jtw.security_1.domain.product.service.ProductDetailService;
-import com.jtw.security_1.domain.product.service.ProductMeListService;
+import com.jtw.security_1.domain.product.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/product")
@@ -25,14 +23,16 @@ public class ProductController {
     private final DeleteProductService deleteProductService;
     private final ProductMeListService productMeListService;
     private final ProductDetailService productDetailService;
+    private final ProductListService productListService;
 
     @GetMapping("/list")
-    public ResponseEntity<List<Product>> ProductList() {
-        return ResponseEntity.ok().body(productRepositories.findAll());
+    public ResponseEntity<List<Map<String, Object>>> ProductList() {
+        List<Map<String, Object>> productList = productListService.ProductList();
+        return new ResponseEntity<>(productList, HttpStatus.OK);
     }
 
     @PostMapping("/join")
-    public ResponseEntity<HttpStatus> ProductJoin(@RequestBody ProductJoinRequest joinRequest) {
+    public ResponseEntity<?> ProductJoin(@RequestBody ProductJoinRequest joinRequest) {
         productService.productJoin(joinRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
