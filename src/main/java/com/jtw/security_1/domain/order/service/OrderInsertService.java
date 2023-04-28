@@ -1,6 +1,7 @@
 package com.jtw.security_1.domain.order.service;
 
 import com.jtw.security_1.domain.order.entity.Order;
+import com.jtw.security_1.domain.order.exception.ProductNotFoundException;
 import com.jtw.security_1.domain.order.repository.OrderRepository;
 import com.jtw.security_1.domain.product.entity.Product;
 import com.jtw.security_1.domain.product.repositories.ProductRepositories;
@@ -25,7 +26,7 @@ public class OrderInsertService {
         Product product = productRepositories.findByProductId(productId);
 
         if (!productRepositories.existsById(productId)) {
-            throw new RuntimeException("없는 상품입니다.");
+            throw new ProductNotFoundException();
         }
 
         Order order = Order.builder()
