@@ -1,6 +1,8 @@
 package com.jtw.security_1.global.security.jwt;
 
 import com.jtw.security_1.global.security.auth.MemberDetailsService;
+import com.jtw.security_1.global.security.exception.TokenExpirationException;
+import com.jtw.security_1.global.security.exception.TokenNotValidException;
 import com.jtw.security_1.global.security.jwt.properties.JwtProperties;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -68,9 +70,9 @@ public class TokenProvider {
                     .parseClaimsJws(token)
                     .getBody();
         } catch (ExpiredJwtException e) {
-            throw new RuntimeException();
+            throw new TokenExpirationException();
         } catch (JwtException e) {
-            throw new RuntimeException();
+            throw new TokenNotValidException();
         }
     }
 
