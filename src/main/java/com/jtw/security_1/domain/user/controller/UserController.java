@@ -1,6 +1,6 @@
 package com.jtw.security_1.domain.user.controller;
 
-import com.jtw.security_1.domain.user.service.UserService;
+import com.jtw.security_1.domain.user.service.UserJoinService;
 import com.jtw.security_1.domain.user.presentation.dto.UserJoinRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/users")
 public class UserController {
 
-    private final UserService userService;
+    private final UserJoinService userService;
 
     @PostMapping("/join")
     public ResponseEntity<String> join(@RequestBody UserJoinRequest dto) {
         userService.join(dto);
-        return  ResponseEntity.ok().body("회원가입이 성공했습니다.");
+        return ResponseEntity.ok().body("회원가입이 성공했습니다.");
     }
 }
