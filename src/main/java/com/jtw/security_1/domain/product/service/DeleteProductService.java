@@ -1,6 +1,8 @@
 package com.jtw.security_1.domain.product.service;
 
+import com.jtw.security_1.domain.order.exception.ProductNotFoundException;
 import com.jtw.security_1.domain.product.entity.Product;
+import com.jtw.security_1.domain.product.exception.ProductInvalidUserIdException;
 import com.jtw.security_1.domain.product.presentation.ProductDeleteRequest;
 import com.jtw.security_1.domain.product.repositories.ProductRepositories;
 import com.jtw.security_1.domain.user.entity.User;
@@ -21,7 +23,7 @@ public class DeleteProductService {
 
     public void DeleteProduct(ProductDeleteRequest productDeleteRequest) {
         if (!productRepositories.existsByProductName(productDeleteRequest.getProductName())) {
-            throw new RuntimeException("존재하지 않는 상품입니다.");
+            throw new ProductNotFoundException();
         }
 
         User user = userRepository.findByPassword(util.currentUser().getPassword());
@@ -30,7 +32,7 @@ public class DeleteProductService {
         if (Objects.equals(product.getUser().getId(), user.getId())) {
             productRepositories.deleteById(product.getProductId());
         } else {
-            System.out.println("등록사용자와 ID가 일치 하지 않습니다.");
+            throw new ProductInvalidUserIdException();
         }
     }
 }
