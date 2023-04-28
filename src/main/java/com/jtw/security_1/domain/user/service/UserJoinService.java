@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserJoinService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -28,7 +28,7 @@ public class UserService {
     private final JwtProperties jwtProperties;
 
     @Transactional(rollbackFor = Exception.class)
-    public String join(UserJoinRequest request) {
+    public void join(UserJoinRequest request) {
 
         //중복 CHECK -> USERNAME
         userRepository.findByUserName(request.getUserName())
@@ -43,32 +43,5 @@ public class UserService {
                 .build();
         //저장
         userRepository.save(user);
-
-        return "SUCCESS";
-    }
-
-    public LoginResponse execute(UserLoginRequest signInRequest) {
-
-        User user = userRepository
-                .findByUserName(signInRequest.getUserName())
-                .orElseThrow(()->new RuntimeException("없는 유저 입니다."));
-
-        if (!passwordEncoder.matches(signInRequest.getPassword(), user.getPassword())) {
-            throw new RuntimeException("패스워드가 일치 하지 않음");
-        }
-
-
-        String accessToken = tokenProvider.generatedAccessToken(signInRequest.getUserName());
-        String refreshToken = tokenProvider.generatedRefreshToken(signInRequest.getUserName());
-
-        RefreshToken refreshTokenEntity = new RefreshToken(signInRequest.getUserName(), refreshToken,tokenProvider.getREFRESH_TOKEN_EXPIRE_TIME());
-
-        refreshTokenRepository.save(refreshTokenEntity);
-
-        return LoginResponse.builder()
-                .accessToken(accessToken)
-                .refreshToken(refreshToken)
-                .expiredAt(tokenProvider.getExpiredAtToken(accessToken, jwtProperties.getAccessSecret()))
-                .build();
     }
 }
