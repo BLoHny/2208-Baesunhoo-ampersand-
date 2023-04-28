@@ -1,5 +1,6 @@
 package com.jtw.security_1.global.filter;
 
+import com.jtw.security_1.global.security.exception.TokenNotValidException;
 import com.jtw.security_1.global.security.jwt.TokenProvider;
 import com.jtw.security_1.global.security.jwt.properties.JwtProperties;
 import jakarta.servlet.FilterChain;
@@ -35,7 +36,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             tokenProvider.extractAllClaims(accessToken, jwtProperties.getAccessSecret());
 
             if (!tokenProvider.getTokenType(accessToken, jwtProperties.getAccessSecret()).equals("ACCESS_TOKEN")) {
-                throw new RuntimeException();
+                throw new TokenNotValidException();
             }
 
             String email = tokenProvider.getUserEmail(accessToken, jwtProperties.getAccessSecret());
