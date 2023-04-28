@@ -1,5 +1,6 @@
 package com.jtw.security_1.domain.product.service;
 
+import com.jtw.security_1.domain.order.exception.ProductNotFoundException;
 import com.jtw.security_1.domain.product.entity.Product;
 import com.jtw.security_1.domain.product.repositories.ProductRepositories;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ public class ProductDetailService {
         Product product = productRepositories.findByProductId(productId);
 
         if (!productRepositories.existsByProductName(product.getProductName())) {
-            throw new RuntimeException("존재하지 않는 상품입니다");
+            throw new ProductNotFoundException();
         }
         return product;
     }
