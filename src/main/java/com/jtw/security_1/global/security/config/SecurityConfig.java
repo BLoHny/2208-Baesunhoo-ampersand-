@@ -30,6 +30,7 @@ public class SecurityConfig {
                 //인가 정책
                 .requestMatchers("/api/v1/users/join", "/api/v1/users/login").permitAll()
                 .requestMatchers( "/product/**").authenticated()
+                .requestMatchers("/order/**").authenticated()
                 .anyRequest().denyAll();
         http
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
