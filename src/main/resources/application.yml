@@ -12,12 +12,12 @@ spring:
     hibernate:
       ddl-auto: update
 
+  redis:
+    host: "127.0.0.1"
+    port: 6379
+
 server:
   port: '9010'
-
-
-
-
 
 jwt:
   accessSecret: youcantrevealthesecretkey1234012300040

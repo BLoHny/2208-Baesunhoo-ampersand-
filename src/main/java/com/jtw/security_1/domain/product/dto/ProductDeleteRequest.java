@@ -1,4 +1,4 @@
-package com.jtw.security_1.domain.product.presentation;
+package com.jtw.security_1.domain.product.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class ProductJoinRequest {
+public class ProductDeleteRequest {
 
     private String productName;
-    private String content;
-    private int price;
 }

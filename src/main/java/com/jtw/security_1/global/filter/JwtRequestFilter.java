@@ -23,8 +23,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private final TokenProvider tokenProvider;
     private final JwtProperties jwtProperties;
 
-    public void registerSecurityContext(HttpServletRequest request, String email) {
-        UsernamePasswordAuthenticationToken authenticationToken = tokenProvider.authenticationToken(email);
+    public void registerSecurityContext(HttpServletRequest request, String userName) {
+        UsernamePasswordAuthenticationToken authenticationToken = tokenProvider.authenticationToken(userName);
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
     }
 

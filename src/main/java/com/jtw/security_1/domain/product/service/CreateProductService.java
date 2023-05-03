@@ -2,7 +2,7 @@ package com.jtw.security_1.domain.product.service;
 
 import com.jtw.security_1.domain.product.entity.Product;
 import com.jtw.security_1.domain.product.exception.ProductDuplicatedException;
-import com.jtw.security_1.domain.product.presentation.ProductJoinRequest;
+import com.jtw.security_1.domain.product.dto.ProductJoinRequest;
 import com.jtw.security_1.domain.product.repositories.ProductRepositories;
 import com.jtw.security_1.domain.user.entity.User;
 import com.jtw.security_1.domain.user.repository.UserRepository;

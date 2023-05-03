@@ -17,7 +17,6 @@ public enum ErrorCode {
     PRODUCT_DUPLICATED(HttpStatus.CONFLICT, ""),
     PRODUCT_INVALID_USERID(HttpStatus.UNAUTHORIZED, "");
 
-
     private final HttpStatus httpStatus;
     private final String message;
 
