@@ -15,7 +15,6 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 
 @Configuration
 @RequiredArgsConstructor
-// @EnableRedisHttpSession(maxInactiveIntervalInSeconds = 360)
 @EnableRedisRepositories
 public class RedisConfig {
 
